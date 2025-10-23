@@ -94,14 +94,82 @@ Since work items are merely links to an outside planning tool, minimal managemen
 
 This sections defines the Entity Relationship Model including key fields and object relationships.
 
-### Desire
+```mermaid
+erDiagram
+    ORGANIZATION ||--o{ ORGANIZATION_DESIRE : expresses
+    ORGANIZATION {
+        string externalId pk
+        string name
+        float arr
+    }
+    ORGANIZATION_DESIRE }o--|| DESIRE : references
+    ORGANIZATION_DESIRE {
+        string organizationId fk
+        string desireId fk
+    }
+    DESIRE {
+        string id pk
+        string title
+        string problemStatment
+        string idealSolution
+        string alternatives
+        string statusId
+    }
+    DESIRE }o--|| STATUS: assigned
 
-- Summary
-- Problem it solves
-- Alternate approaches
-- Why it matters
-- Total Lost or Blocked Revenue
-- Total Current Revenue
-- Total Contact Votes
+    STATUS {
+        string id pk
+        string label
+        string description
+        boolean isClosed
+        boolean isDelivered
+    }
+    
+    ORGANIZATION ||--o{ CONTACT : employs
+    CONTACT {
+        string externalId pk
+        string organizationId fk
+        string name
+        string email
+    }
+
+    ORGANIZATION ||--o{ DEAL : owns
+    DEAL {
+        string externalId pk
+        string organizationId fk
+        string name
+        boolean isWon
+        string dealStage 
+        float contractValue
+    }
+
+    CONTACT ||--o{ CONTACT_VOTE : asks_for
+    CONTACT_VOTE {
+        string contactId fk
+        string desireId fk
+    }
+    CONTACT_VOTE }o--|| DESIRE: references
+
+    DEAL ||--o{ DEAL_VOTE : asks_for
+    DEAL_VOTE {
+        string dealId fk
+        string desireId fk
+    }
+    DEAL_VOTE }o--|| DESIRE: references
+
+    DESIRE ||--o{ DESIRE_WORK_ITEM : delivered_by
+    DESIRE_WORK_ITEM }o--|| WORK_ITEM: references
+    WORK_ITEM{
+        string externalId pk
+        string externalKey
+        string externalTitle
+        string externalStatus
+        boolean isDelivered
+    }
+    DESIRE_WORK_ITEM {
+        string desireId fk
+        string workItemId fk
+    }
+```
 
 
