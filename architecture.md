@@ -18,3 +18,8 @@ The codebase use of data repository must support an abstraction from the underly
 ## Dependency Management
 
 - Composer will manage the PHP depencies. 
+
+
+## Runtime Environments
+
+The application will use .env files to control and environment specific information. The application will avoid hardcoded paths to file systems, databases or other environment specific aspects, and instead load them from the provided .env file.   
