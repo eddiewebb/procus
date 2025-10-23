@@ -88,7 +88,23 @@ Since work items are merely links to an outside planning tool, minimal managemen
 ### Assignable Report Permissions
 
 - View Reports
-  
+
+
+## Reporting
+
+The system shall allow reports to summarize the relationships and make insightful analysis.
+
+### Top Desires by BLocked Revenue
+
+This report shall list Desires, ordered by the total ARR of associated Deals where the status is not closedWon.  Any pending or lost deals should be considered. This report can be filtered by Need Level of the votes.
+
+### Top Desires by Existing Customers
+
+This report shall list Desires, ordered by the total ARR of associated Organizations where the ARR is positive, is in active standing. This report can be filtered by Need Level of the votes.
+
+### Top Desires by Votes
+
+This report shall list Desires, ordered by the total votes of associated Contacts regardless of their Deal or Organization status. This report can be filtered by Need Level of the votes.
   
 ## Object Model (ERD)
 
@@ -100,13 +116,17 @@ erDiagram
     ORGANIZATION {
         string externalId pk
         string name
+        boolean isActive
+        boolean isChurned
         float arr
     }
     ORGANIZATION_DESIRE }o--|| DESIRE : references
     ORGANIZATION_DESIRE {
         string organizationId fk
         string desireId fk
+        string needLevelId fk
     }
+    ORGANIZATION_DESIRE }o--|| NEED_LEVEL: references
     DESIRE {
         string id pk
         string title
@@ -147,15 +167,23 @@ erDiagram
     CONTACT_VOTE {
         string contactId fk
         string desireId fk
+        string needLevelId fk
     }
     CONTACT_VOTE }o--|| DESIRE: references
+    CONTACT_VOTE }o--|| NEED_LEVEL: references
+    NEED_LEVEL {
+        string id pk
+        string label "ENUM:Must Have, Important, Nice to Have"
+    }
 
     DEAL ||--o{ DEAL_VOTE : asks_for
     DEAL_VOTE {
         string dealId fk
         string desireId fk
+        string needLevelId fk
     }
     DEAL_VOTE }o--|| DESIRE: references
+    DEAL_VOTE }o--|| NEED_LEVEL: references
 
     DESIRE ||--o{ DESIRE_WORK_ITEM : delivered_by
     DESIRE_WORK_ITEM }o--|| WORK_ITEM: references
