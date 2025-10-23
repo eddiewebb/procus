@@ -8,7 +8,8 @@ The applicaiton has a few primary concerns:
 
 - Desire: Desires represent the individual unit of a customer ask. A desire might be a feature, a fix, minor UI change or comprehensive change in product approach.
 - Organization: Organizations represent the legal entity that holds or prospectively holds a contract with our platform. They are associated with a `Company` in the CRM as a 1:1 relationship. ORganizations represent existing or potential contract value measured in ARR.
-- Contact: Contracts are indivudal users or prospepctive users of our platorm. They may express and vote for desires, but do not represent any contract value themselves.
+- Deal: Deals are individual opportunities to win or expand revenue with an Organization. 
+- Contact: Contacts are indivudal users or prospepctive users of our platorm. They may express and vote for desires, but do not represent any contract value themselves.
 - Work Item: Work Items are the tickets used by product and engineering team to track work. These work items exist outside this applicaiton typically in GitHub Issues or Jira Work. A single Desire has a 0-many relationship with Work Items.
 - User: Users are the internal members of our company, consisting of customer facing and itnernal roles. Users will have access to create and report on Desires, and can also associate Desires which Organizations, Contacts, and Work Items.
 - Report: Reports aggregate and summarize information for multiple audiences, and will consistent of different types support product team and customer facing roles.
@@ -66,7 +67,9 @@ Since work items are merely links to an outside planning tool, minimal managemen
 - View Reports
   
   
-## Object Model
+## Object Model (ERD)
+
+This sections defines the Entity Relationship Model including key fields and object relationships.
 
 ### Desire
 
@@ -77,3 +80,10 @@ Since work items are merely links to an outside planning tool, minimal managemen
 - Total Lost or Blocked Revenue
 - Total Current Revenue
 - Total Contact Votes
+
+### Organization
+
+These fields are mapped values from the assigned CRM system like Hubspot, and should be synchronized on a regular schedule.
+
+- Name
+- Linked Desires
