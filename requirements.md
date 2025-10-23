@@ -1,10 +1,10 @@
-# Product Focus Requirement Doc
+# Product Focus - Requirement Doc
 
-Product Focus is an online application that helps product teams prioritize their backlog by aggregating customer feedback via connection from CRM tool like Hubspot.
+Product Focus ("Procus") is an online application that helps product teams prioritize their backlog by aggregating customer feedback via connection from CRM tool like Hubspot.
 
 ## Main Concepts
 
-The applicaiton has a few primary concerns:
+The application will correlate customer accounts with our internal product backlog through an intermediate object dubbed a 'Desire.'  The application will need to maintain these objects, manage user access, and run regular syncs jobs with the ultimate goal to generate easily consumable reports for our product teams and customer facing roles. 
 
 ### Application Owned Objects 
 
